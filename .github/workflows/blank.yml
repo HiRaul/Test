@@ -30,4 +30,5 @@ jobs:
         run: |
           git branch release/4.4.3 main
           git push origin release/4.4.3:release/4.4.3
+          git checkout main
           git branch
