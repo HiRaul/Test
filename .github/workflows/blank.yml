@@ -32,7 +32,7 @@ jobs:
           payload: |
             {
               "key": "value",
-              "foo": "bar"
+              "foo": "bar",
               "text": "TESTING"
             }
 
