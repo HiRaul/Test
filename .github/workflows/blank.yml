@@ -12,14 +12,15 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
+  
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -28,10 +29,12 @@ jobs:
       - name: slack-send
         uses: slackapi/slack-github-action@v1.18.0
         with:
-          # Slack channel ID where message will be posted. Needed if using bot token
-          channel-id: C0322LK2SGL
-          # Message to post into Slack. Needed if using bot token
-          slack-message: Checking if this is working
+          payload: |
+            {
+              "key": "value",
+              "foo": "bar"
+              "text": "TESTING"
+            }
 
 
       # Runs a set of commands using the runners shell
