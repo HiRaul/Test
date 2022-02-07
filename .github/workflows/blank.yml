@@ -25,9 +25,18 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: slack-send
+        uses: slackapi/slack-github-action@v1.18.0
+        with:
+          # Slack channel ID where message will be posted. Needed if using bot token
+          channel-id: C0322LK2SGL
+          # Message to post into Slack. Needed if using bot token
+          slack-message: Checking if this is working
+
+
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          git branch release/4.4.3 main
-          git push origin release/4.4.3:release/4.4.3
-          git branch|grep "*"
+#       - name: Run a multi-line script
+#         run: |
+#           git branch release/4.4.3 main
+#           git push origin release/4.4.3:release/4.4.3
+#           git branch|grep "*"
