@@ -9,7 +9,7 @@ on:
 #     branches: [ main ]
 
   schedule:
-  - cron: '20 15 1-8,15-21 * 5'
+  - cron: '20 15 * * 5'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   
@@ -26,8 +26,17 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Check if is Code freeze week
+        run: |
+          WEEK_OF_YEAR=`/bin/date +%V`
+          echo $WEEK_OF_YEAR
+          SHOULD_RUN_CODE_FREEZE=$([[ $(($WEEK_OF_YEAR % 2)) -eq 0 ]] && echo YES || echo NO)
+          echo $result
+          echo "SHOULD_RUN_CODE_FREEZE=$SHOULD_RUN_CODE_FREEZE" >> $GITHUB_ENV
+          
       - name: slack-send
         uses: slackapi/slack-github-action@v1.18.0
+        if: ${{ secrets.SHOULD_RUN_CODE_FREEZE }}
         with:
           payload: |
             {
