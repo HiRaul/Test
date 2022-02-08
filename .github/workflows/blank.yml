@@ -30,7 +30,7 @@ jobs:
         run: |
           WEEK_OF_YEAR=`/bin/date +%V`
           echo $WEEK_OF_YEAR
-          SHOULD_RUN_CODE_FREEZE=$([[ $(($WEEK_OF_YEAR % 2)) -eq 0 ]] && echo YES || echo NO)
+          SHOULD_RUN_CODE_FREEZE=$([[ $(($WEEK_OF_YEAR % 2)) -eq 1 ]] && echo true || echo false)
           echo $result
           echo "SHOULD_RUN_CODE_FREEZE=$SHOULD_RUN_CODE_FREEZE" >> $GITHUB_ENV
           
