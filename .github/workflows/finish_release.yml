@@ -1,0 +1,62 @@
+name: Finish Release
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  finish-release:
+    name: Finish Release
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Check if this is a release branch
+        run: |
+          if [[ "${{ env.BRANCH_NAME }}" =~ ^release-candidate.* ]]; then
+              echo "SHOULD_RUN_FINISH_RELEASE=true" >> $GITHUB_ENV
+          fi
+
+      - name: Load app version
+        if: ${{ env.SHOULD_RUN_FINISH_RELEASE == 'true' }}
+        run: |
+          echo "APP_VERSION=4.4.6" >> $GITHUB_ENV
+
+      - name: Merge release-candidate into main
+        if: ${{ env.SHOULD_RUN_FINISH_RELEASE == 'true' }}
+        run: |
+          git config --global user.email "tech@himama.com"
+          git config --global user.name "Jumpers bot"
+          git merge ${{ env.BRANCH_NAME }}
+          git push
+
+      name: Create tag
+        if: ${{ env.SHOULD_RUN_FINISH_RELEASE == 'true' }}
+        run: |
+          git config --global user.email "tech@himama.com"
+          git config --global user.name "Jumpers bot"
+          git checkout main
+          git pull
+          git tag -a ${{ env.APP_VERSION }} -m "Version ${{ env.APP_VERSION }}"
+          git push
+
+      name: Create release notes
+        if: ${{ env.SHOULD_RUN_FINISH_RELEASE == 'true' }}
+        uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: node
+          package-name: himama
+
+      - name: Send slack message in Jumpers channel
+        if: ${{ env.SHOULD_RUN_FINISH_RELEASE == 'true' }}
+        uses: slackapi/slack-github-action@v1.18.0
+        with:
+          payload: |
+            {
+              "text": "Hey Jumpers! Heads up because we just started the release of version `${{ env.APP_VERSION }}` \n\n>*RELEASE-VERSION:* `${{ env.APP_VERSION }}` \n\n❗️*Once we have TestFlight and Alpha versions released promote them to the stores in phase rollout*❗️ \n\nKeep jumping 🦘"
+            }
