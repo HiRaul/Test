@@ -35,7 +35,7 @@ jobs:
           git merge ${{ env.BRANCH_NAME }}
           git push
 
-      name: Create tag
+      - name: Create tag
         if: ${{ env.SHOULD_RUN_FINISH_RELEASE == 'true' }}
         run: |
           git config --global user.email "tech@himama.com"
@@ -45,7 +45,7 @@ jobs:
           git tag -a ${{ env.APP_VERSION }} -m "Version ${{ env.APP_VERSION }}"
           git push
 
-      name: Create release notes
+      - name: Create release notes
         if: ${{ env.SHOULD_RUN_FINISH_RELEASE == 'true' }}
         uses: google-github-actions/release-please-action@v3
         with:
