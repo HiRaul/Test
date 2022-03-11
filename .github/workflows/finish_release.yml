@@ -32,7 +32,7 @@ jobs:
         run: |
           git config --global user.email "tech@himama.com"
           git config --global user.name "Jumpers bot"
-          git checkout --track main
+          git checkout main
           git pull
           git merge ${{ env.BRANCH_NAME }}
           git push
@@ -42,7 +42,7 @@ jobs:
         run: |
           git config --global user.email "tech@himama.com"
           git config --global user.name "Jumpers bot"
-          git checkout --track main
+          git checkout main
           git pull
           git tag -a ${{ env.APP_VERSION }} -m "Version ${{ env.APP_VERSION }}"
           git push
