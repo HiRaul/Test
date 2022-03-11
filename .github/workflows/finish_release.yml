@@ -27,7 +27,7 @@ jobs:
       - name: Load app version
         if: ${{ env.SHOULD_RUN_FINISH_RELEASE == 'true' }}
         run: |
-          echo "APP_VERSION=4.4.8" >> $GITHUB_ENV
+          echo "APP_VERSION=4.4.9" >> $GITHUB_ENV
 
       - name: Merge release-candidate into main
         if: ${{ env.SHOULD_RUN_FINISH_RELEASE == 'true' }}
