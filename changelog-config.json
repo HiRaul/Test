@@ -13,8 +13,8 @@
           "labels": ["Test"]
         },
         {
-            "title": "## 🏡 Housekeeping",
-            "labels": ["Housekeeping"]
-          }
+          "title": "## 🏡 Housekeeping",
+          "labels": ["Housekeeping"]
+        }
       ]
 }
