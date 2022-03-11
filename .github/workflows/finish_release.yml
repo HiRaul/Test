@@ -44,7 +44,7 @@ jobs:
           git config --global user.name "Jumpers bot"
           git fetch
           git checkout main
-          git tag -a ${{ env.APP_VERSION }} -m "Version ${{ env.APP_VERSION }}"
+          git tag ${{ env.APP_VERSION }}
           git push
 
       - name: Create release notes
