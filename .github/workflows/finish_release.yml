@@ -33,7 +33,7 @@ jobs:
           git config --global user.email "tech@himama.com"
           git config --global user.name "Jumpers bot"
           git fetch
-          git checkout main
+          git checkout origin/main
           git merge --allow-unrelated-histories ${{ env.BRANCH_NAME }}
           git push
 
@@ -43,7 +43,7 @@ jobs:
           git config --global user.email "tech@himama.com"
           git config --global user.name "Jumpers bot"
           git fetch
-          git checkout main
+          git checkout origin/main
           git tag ${{ env.APP_VERSION }}
           git push
 
