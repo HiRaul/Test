@@ -49,6 +49,7 @@ jobs:
           git push --tags
 
       - name: "Build Changelog"
+        id: build_changelog
         uses: mikepenz/release-changelog-builder-action@v1
         with:
           configuration: "changelog-config.json"
@@ -58,7 +59,7 @@ jobs:
         with:
           tag_name: ${{ env.APP_VERSION }}
           release_name: ${{ env.APP_VERSION }}
-          body: ${{steps.github_release.outputs.changelog}}
+          body: ${{steps.build_changelog.outputs.changelog}}
 
       - name: Send slack message in Jumpers channel
         if: ${{ env.SHOULD_RUN_FINISH_RELEASE == 'true' }}
