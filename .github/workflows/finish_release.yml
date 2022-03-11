@@ -27,7 +27,7 @@ jobs:
       - name: Load app version
         if: ${{ env.SHOULD_RUN_FINISH_RELEASE == 'true' }}
         run: |
-          echo "APP_VERSION=4.4.10" >> $GITHUB_ENV
+          echo "APP_VERSION=4.4.11" >> $GITHUB_ENV
 
       - name: Merge release-candidate into main
         if: ${{ env.SHOULD_RUN_FINISH_RELEASE == 'true' }}
@@ -49,8 +49,8 @@ jobs:
           git push --tags
 
       - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@v1
+        uses: scottbrenner/generate-changelog-action@master
+        id: Changelog
 
       - name: Create Release
         uses: actions/create-release@v1
