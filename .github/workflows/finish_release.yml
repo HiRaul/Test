@@ -34,8 +34,7 @@ jobs:
           git config --global user.name "Jumpers bot"
           git fetch
           git checkout main
-          git pull origin main --allow-unrelated-histories
-          git merge ${{ env.BRANCH_NAME }}
+          git merge --allow-unrelated-histories ${{ env.BRANCH_NAME }}
           git push
 
       - name: Create tag
@@ -45,7 +44,6 @@ jobs:
           git config --global user.name "Jumpers bot"
           git fetch
           git checkout main
-          git pull origin main --allow-unrelated-histories
           git tag -a ${{ env.APP_VERSION }} -m "Version ${{ env.APP_VERSION }}"
           git push
 
