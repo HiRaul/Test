@@ -36,7 +36,7 @@ jobs:
           git config --global user.name "Jumpers bot"
           git fetch
           git checkout main
-          git merge --allow-unrelated-histories ${{ env.BRANCH_NAME }}
+          git merge ${{ env.BRANCH_NAME }}
           git push
 
       - name: Create tag
@@ -67,5 +67,5 @@ jobs:
         with:
           payload: |
             {
-              "text": "Hey Jumpers! Heads up because we just started the release of version `${{ env.APP_VERSION }}` \n\n>*RELEASE-VERSION:* `${{ env.APP_VERSION }}` \n\n❗️*Once we have TestFlight and Alpha versions released promote them to the stores in phase rollout*❗️ \n\nKeep jumping 🦘"
+              "text": "Hey Jumpers! We just finished the release of version `${{ env.APP_VERSION }}` \n\n>Check the *Release log* <https://github.com/HiMamaInc/hm-mobile-react-native/releases|here> \n\nThanks team! Keep jumping 🦘"
             }
