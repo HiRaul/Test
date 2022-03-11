@@ -45,9 +45,8 @@ jobs:
           git config --global user.email "tech@himama.com"
           git config --global user.name "Jumpers bot"
           git fetch
-          git checkout main
           git tag ${{ env.APP_VERSION }}
-          git push
+          git push --tags
 
       - name: Create release notes
         if: ${{ env.SHOULD_RUN_FINISH_RELEASE == 'true' }}
