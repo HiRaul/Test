@@ -27,7 +27,7 @@ jobs:
       - name: Load app version
         if: ${{ env.SHOULD_RUN_FINISH_RELEASE == 'true' }}
         run: |
-          echo "APP_VERSION=4.4.14" >> $GITHUB_ENV
+          echo "APP_VERSION=4.4.15" >> $GITHUB_ENV
 
       - name: Merge release-candidate into main
         if: ${{ env.SHOULD_RUN_FINISH_RELEASE == 'true' }}
@@ -58,7 +58,7 @@ jobs:
         uses: actions/create-release@v1
         with:
           tag_name: ${{ env.APP_VERSION }}
-          release_name: ${{ env.APP_VERSION }}
+          release_name: HiMama - Release ${{ env.APP_VERSION }}
           body: ${{steps.build_changelog.outputs.changelog}}
 
       - name: Send slack message in Jumpers channel
