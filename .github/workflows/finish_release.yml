@@ -58,7 +58,7 @@ jobs:
         uses: actions/create-release@v1
         with:
           tag_name: ${{ env.APP_VERSION }}
-          release_name: ${{ env.APP_VERSION }}
+          release_name: HiMama - Release ${{ env.APP_VERSION }}
           body: ${{steps.build_changelog.outputs.changelog}}
 
       - name: Send slack message in Jumpers channel
