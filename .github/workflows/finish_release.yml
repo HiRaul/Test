@@ -27,7 +27,7 @@ jobs:
 
       - name: Load app version
         run: |
-          echo "APP_VERSION=4.4.16" >> $GITHUB_ENV
+          echo "APP_VERSION=4.4.17" >> $GITHUB_ENV
 
       - name: Merge release-candidate into main
         run: |
@@ -66,7 +66,7 @@ jobs:
           git config --global user.name "Jumpers bot"
           git fetch
           git checkout develop
-          git merge main -m "Merge main into develop"
+          git merge --no-ff main -m "Merge main into develop"
           CONFLICTS=$(git ls-files -u | wc -l)
           if [ "$CONFLICTS" -gt 0 ] ; then
             echo "There is a merge conflict. Aborting"
