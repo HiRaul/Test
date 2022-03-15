@@ -27,7 +27,7 @@ jobs:
 
       - name: Load app version
         run: |
-          echo "APP_VERSION=4.4.20" >> $GITHUB_ENV
+          echo "APP_VERSION=4.4.21" >> $GITHUB_ENV
 
       - name: Merge release-candidate into main
         run: |
@@ -73,7 +73,7 @@ jobs:
       - name: Create message in case of conflicts
         if: steps.merge-main-develop.outcome == 'failure' && steps.merge-main-develop.conclusion == 'success'
         run: |
-          echo "DEVELOP_MERGE_FAILED="\\n\\n‼️ Merge of main into develop has conflicts. Handle it manually."" >> $GITHUB_ENV
+          echo "DEVELOP_MERGE_FAILED="\\n\\n‼️ Merge of `main` into `develop` has conflicts. *Handle it manually*."" >> $GITHUB_ENV
 
       - name: Send slack message in Jumpers channel
         uses: slackapi/slack-github-action@v1.18.0
