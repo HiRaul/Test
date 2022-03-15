@@ -22,6 +22,8 @@ jobs:
         run: |
           if [[ "${{ env.BRANCH_NAME }}" =~ ^release-candidate.* ]]; then
               echo "SHOULD_RUN_FINISH_RELEASE=true" >> $GITHUB_ENV
+              echo "This is not a release-candidate branch"
+              exit 1
           fi
 
       - name: Load app version
