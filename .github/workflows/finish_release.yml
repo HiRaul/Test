@@ -27,7 +27,7 @@ jobs:
 
       - name: Load app version
         run: |
-          echo "APP_VERSION=4.4.17" >> $GITHUB_ENV
+          echo "APP_VERSION=4.4.18" >> $GITHUB_ENV
 
       - name: Merge release-candidate into main
         run: |
@@ -60,21 +60,20 @@ jobs:
           body: ${{steps.build_changelog.outputs.changelog}}
 
       - name: Merge main into develop
+        id: merge-main-develop
         continue-on-error: true
         run: |
           git config --global user.email "tech@himama.com"
           git config --global user.name "Jumpers bot"
           git fetch
           git checkout develop
-          git merge --no-ff main -m "Merge main into develop"
-          CONFLICTS=$(git ls-files -u | wc -l)
-          if [ "$CONFLICTS" -gt 0 ] ; then
-            echo "There is a merge conflict. Aborting"
-            git merge --abort
-            echo "DEVELOP_MERGE_FAILED="\n\n‼️ Merge of main into develop has conflicts. Handle it manually."" >> $GITHUB_ENV
-          else
-            git push
-          fi
+          git merge main -m "Merge main into develop"
+          git push
+
+      - name: Create message in case of conflicts
+        if: steps.merge-main-develop.outcome == 'failure' && steps.merge-main-develop.conclusion == 'success'
+        run: |
+          echo "DEVELOP_MERGE_FAILED="\n\n‼️ Merge of main into develop has conflicts. Handle it manually.""
 
       - name: Send slack message in Jumpers channel
         uses: slackapi/slack-github-action@v1.18.0
