@@ -27,7 +27,7 @@ jobs:
 
       - name: Load app version
         run: |
-          echo "APP_VERSION=4.4.21" >> $GITHUB_ENV
+          echo "APP_VERSION=4.4.22" >> $GITHUB_ENV
 
       - name: Merge release-candidate into main
         run: |
