@@ -17,6 +17,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+          token: ${{ secrets.ACCESS_TOKEN }}
 
       - name: Check if this is a release branch
         run: |
@@ -27,7 +28,7 @@ jobs:
 
       - name: Load app version
         run: |
-          echo "APP_VERSION=4.4.23" >> $GITHUB_ENV
+          echo "APP_VERSION=4.4.24" >> $GITHUB_ENV
 
       - name: Merge release-candidate into main
         run: |
