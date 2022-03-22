@@ -28,9 +28,13 @@ jobs:
 
       - name: Load app version
         run: |
-          echo "APP_VERSION=4.4.24" >> $GITHUB_ENV
+          echo "APP_VERSION=4.4.25" >> $GITHUB_ENV
 
       - name: Merge release-candidate into main
+        uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+            token: ${{ secrets.ACCESS_TOKEN }}
         run: |
           git config --global user.email "tech@himama.com"
           git config --global user.name "Jumpers bot"
