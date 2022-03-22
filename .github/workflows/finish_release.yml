@@ -32,9 +32,9 @@ jobs:
 
       - name: Merge release-candidate into main
         uses: actions/checkout@v2
-          with:
-            fetch-depth: 0
-            token: ${{ secrets.ACCESS_TOKEN }}
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.ACCESS_TOKEN }}
         run: |
           git config --global user.email "tech@himama.com"
           git config --global user.name "Jumpers bot"
