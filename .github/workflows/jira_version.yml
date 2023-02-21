@@ -32,9 +32,10 @@ jobs:
           --header 'Content-Type: application/json' \
           --data '{
           "archived": false,
-          "description": "An excellent version",
+          "description": "An excellent version test 2",
           "name": "${{ env.APP_VERSION }}",
           "projectId": 10081,
+          "startDate": "2010-07-01",
           "releaseDate": "2010-07-06",
           "released": true
           }'
