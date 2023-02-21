@@ -25,17 +25,5 @@ jobs:
 
       - name: Create version on Jira
         run: |
-        curl --request POST \
-            --url 'https://himama.atlassian.net/rest/api/3/version' \
-            --user '${{ env.JIRA_USER }}:${{ env.JIRA_TOKEN }}' \
-            --header 'Accept: application/json' \
-            --header 'Content-Type: application/json' \
-            --data '{
-            "archived": false,
-            "description": "An excellent version",
-            "name": "${{ env.APP_VERSION }}",
-            "projectId": 10081,
-            "releaseDate": "2010-07-06",
-            "released": true
-            }'
+        curl --request POST --url 'https://himama.atlassian.net/rest/api/3/version' --user '${{ env.JIRA_USER }}:${{ env.JIRA_TOKEN }}' --header 'Accept: application/json' --header 'Content-Type: application/json' --data '{"archived": false, "description": "An excellent version", "name": "${{ env.APP_VERSION }}", "projectId": 10081, "releaseDate": "2010-07-06", "released": true}'
 
