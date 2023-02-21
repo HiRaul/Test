@@ -1,0 +1,41 @@
+name: Jira version
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  finish-release:
+    name: Jira version
+    runs-on: ubuntu-latest
+    env:
+      JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
+      JIRA_USER: ${{ secrets.JIRA_USER }}
+      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: Load app version
+        run: |
+          echo "APP_VERSION=4.4.24" >> $GITHUB_ENV
+
+      - name: Create version on Jira
+        run: |
+        curl --request POST \
+            --url 'https://himama.atlassian.net/rest/api/3/version' \
+            --user '${{ env.JIRA_USER }}:${{ env.JIRA_TOKEN }}' \
+            --header 'Accept: application/json' \
+            --header 'Content-Type: application/json' \
+            --data '{
+            "archived": false,
+            "description": "An excellent version",
+            "name": "${{ env.APP_VERSION }}",
+            "projectId": 10081,
+            "releaseDate": "2010-07-06",
+            "released": true
+            }'
+
