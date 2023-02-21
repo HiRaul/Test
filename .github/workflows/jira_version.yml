@@ -35,7 +35,7 @@ jobs:
           "description": "An excellent version test 2",
           "name": "${{ env.APP_VERSION }}",
           "projectId": 10081,
-          "startDate": "2010-07-01",
-          "releaseDate": "2010-07-06",
+          "startDate": "$(date +'%Y-%m-%d')",
+          "releaseDate": "$(date +'%Y-%m-%d')",
           "released": true
           }'
