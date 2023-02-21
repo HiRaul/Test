@@ -40,5 +40,5 @@ jobs:
           "projectId": 10081,
           "startDate": "${{ env.NOW }}",
           "releaseDate": "${{ env.NOW }}",
-          "released": true
+          "released": false
           }'
