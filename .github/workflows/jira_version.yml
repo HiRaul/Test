@@ -23,6 +23,9 @@ jobs:
         run: |
           echo "APP_VERSION=4.4.24" >> $GITHUB_ENV
 
+      - name: Set current date as env variable
+        run: echo "NOW=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
       - name: Create version on Jira
         run: |
           curl --request POST \
@@ -35,7 +38,7 @@ jobs:
           "description": "An excellent version test 2",
           "name": "${{ env.APP_VERSION }}",
           "projectId": 10081,
-          "startDate": "$(date +'%Y-%m-%d')",
-          "releaseDate": "$(date +'%Y-%m-%d')",
+          "startDate": "${{ env.NOW }}",
+          "releaseDate": "${{ env.NOW }}",
           "released": true
           }'
