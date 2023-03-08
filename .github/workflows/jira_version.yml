@@ -37,7 +37,7 @@ jobs:
           "archived": false,
           "description": "## 🐛 Fixes
 
-          - Fix/push notifications/jump 819
+          - Fix\/push notifications\/jump 819
             - PR: #523
 
           ",
