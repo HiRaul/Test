@@ -23,6 +23,19 @@ jobs:
         run: |
           echo "APP_VERSION=4.4.24" >> $GITHUB_ENV
 
+      - name: Build Changelog
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@v1
+        with:
+          configuration: "changelog-config.json"
+
+      - name: Create Release notes
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ env.APP_VERSION }}
+          release_name: HiMama - Release ${{ env.APP_VERSION }}
+          body: ${{steps.build_changelog.outputs.changelog}}
+
       - name: Set current date as env variable
         run: echo "NOW=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
@@ -35,10 +48,9 @@ jobs:
           --header 'Content-Type: application/json' \
           --data '{
           "archived": false,
-          "description": "An excellent version test 3",
+          "description": "${{ steps.build_changelog.outputs.changelog }}",
           "name": "${{ env.APP_VERSION }}",
           "projectId": 10081,
-          "startDate": "${{ env.NOW }}",
           "releaseDate": "${{ env.NOW }}",
           "released": true
           }'
