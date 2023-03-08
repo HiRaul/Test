@@ -28,13 +28,13 @@ jobs:
 
       - name: Set current desc
         run: |
-        mystring="## 🐛 Fixes
+          mystring="## 🐛 Fixes
 
-          - Fix/push notifications/jump 819
-            - PR: #523
+            - Fix/push notifications/jump 819
+              - PR: #523
 
-        "
-        echo "DESCR=$(echo "${mystring}" | jq -c .)" >> $GITHUB_ENV
+          "
+          echo "DESCR=$(echo "${mystring}" | jq -c .)" >> $GITHUB_ENV
 
       - name: Create version on Jira
         run: |
