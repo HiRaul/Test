@@ -28,14 +28,14 @@ jobs:
 
       - name: Create version on Jira
         run: |
-          my_string='## 🐛 Fixes
+          mystring='## 🐛 Fixes
 
           - Fix/push notifications/jump 819
             - PR: #523
 
           '
 
-          formatted=$(echo "${my_string}" | jq -c .)
+          formatted=$(echo "${mystring}" | jq -c .)
 
           curl --request POST \
           --url 'https://himama.atlassian.net/rest/api/3/version' \
