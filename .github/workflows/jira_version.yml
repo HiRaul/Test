@@ -37,8 +37,10 @@ jobs:
           "archived": false,
           "description": "## 🐛 Fixes
 
-- Fix/push notifications/jump 819
-   - PR: #523",
+          - Fix/push notifications/jump 819
+            - PR: #523
+
+          ",
           "name": "${{ env.APP_VERSION }}",
           "projectId": 10081,
           "releaseDate": "${{ env.NOW }}",
