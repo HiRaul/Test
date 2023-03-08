@@ -26,15 +26,28 @@ jobs:
       - name: Set current date as env variable
         run: echo "NOW=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
-      - name: Set current desc
-        run: |
-          mystring="## 🐛 Fixes
+      - name: Build Changelog
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@v1
+        with:
+          configuration: "changelog-config.json"
 
-            - Fix/push notifications/jump 819
-              - PR: #523
+      - name: Create Release notes
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ env.APP_VERSION }}
+          release_name: HiMama - Release ${{ env.APP_VERSION }}
+          body: ${{steps.build_changelog.outputs.changelog}}
 
-          "
-          echo "DESCR=$(echo ${mystring})" >> $GITHUB_ENV
+      # - name: Set current desc
+      #   run: |
+      #     mystring="## 🐛 Fixes
+
+      #       - Fix/push notifications/jump 819
+      #         - PR: #523
+
+      #     "
+      #     echo "DESCR=$(echo ${mystring})" >> $GITHUB_ENV
 
       - name: Create version on Jira
         run: |
@@ -45,7 +58,7 @@ jobs:
           --header 'Content-Type: application/json' \
           --data '{
           "archived": false,
-          "description": "${{ env.DESCR }}",
+          "description": "$(echo ${{steps.build_changelog.outputs.changelog}})",
           "name": "${{ env.APP_VERSION }}",
           "projectId": 10081,
           "releaseDate": "${{ env.NOW }}",
