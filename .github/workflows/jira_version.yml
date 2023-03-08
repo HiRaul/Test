@@ -21,7 +21,7 @@ jobs:
 
       - name: Load app version
         run: |
-          echo "APP_VERSION=4.4.24" >> $GITHUB_ENV
+          echo "APP_VERSION=4.4.25" >> $GITHUB_ENV
 
       - name: Build Changelog
         id: build_changelog
