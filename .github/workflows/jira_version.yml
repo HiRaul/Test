@@ -52,7 +52,7 @@ jobs:
           --header 'Content-Type: application/json' \
           --data '{
           "archived": false,
-          "description": "${{ env.DESCR }}",
+          "description": "https://github.com/HiMamaInc/hm-mobile-react-native/releases/5.2.2",
           "name": "${{ env.APP_VERSION }}",
           "projectId": 10081,
           "releaseDate": "${{ env.NOW }}",
