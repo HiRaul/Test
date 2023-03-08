@@ -35,7 +35,10 @@ jobs:
           --header 'Content-Type: application/json' \
           --data '{
           "archived": false,
-          "description": "## 🐛 Fixes \n\n - Fix/push notifications/jump 819\n- PR: #523",
+          "description": "## 🐛 Fixes
+
+- Fix/push notifications/jump 819
+   - PR: #523",
           "name": "${{ env.APP_VERSION }}",
           "projectId": 10081,
           "releaseDate": "${{ env.NOW }}",
