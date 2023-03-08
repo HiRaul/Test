@@ -33,7 +33,7 @@ jobs:
           - Fix/push notifications/jump 819
             - PR: #523
 
-        ""
+        "
         echo "DESCR=$(echo "${mystring}" | jq -c .)" >> $GITHUB_ENV
 
       - name: Create version on Jira
